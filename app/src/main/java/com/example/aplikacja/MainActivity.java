@@ -32,6 +32,23 @@ public class MainActivity extends AppCompatActivity {
         poleNumer = findViewById(R.id.ImageNumber);
         przelacznikTlo = findViewById(R.id.switchBlue);
 
+        obrazek.setImageResource(obrazy[aktualny]);
+        poleNumer.setText("" + (aktualny + 1));
+
+        przyciskPrev.setOnClickListener(v -> {
+            aktualny--;
+            if (aktualny < 0) aktualny = obrazy.length - 1;
+            obrazek.setImageResource(obrazy[aktualny]);
+            poleNumer.setText("" + (aktualny + 1));
+        });
+
+        przyciskNext.setOnClickListener(v -> {
+            aktualny++;
+            if (aktualny >= obrazy.length) aktualny = 0;
+            obrazek.setImageResource(obrazy[aktualny]);
+            poleNumer.setText("" + (aktualny + 1));
+        });
+
 
 
         przelacznikTlo.setOnCheckedChangeListener((buttonView, isChecked) -> {
