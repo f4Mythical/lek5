@@ -2,6 +2,8 @@ package com.example.aplikacja;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +50,30 @@ public class MainActivity extends AppCompatActivity {
             obrazek.setImageResource(obrazy[aktualny]);
             poleNumer.setText("" + (aktualny + 1));
         });
+        poleNumer.addTextChangedListener(
+                new android.text.TextWatcher() {
+                    @Override
+                    public void afterTextChanged(android.text.Editable editable) {
+                        String tekst = editable.toString();
+                        if (!tekst.isEmpty()) {
+                            int numer = Integer.parseInt(tekst);
+                            if (numer >= 1 && numer <= obrazy.length) {
+                                aktualny = numer - 1;
+                                obrazek.setImageResource(obrazy[aktualny]);
+                            }else {
+                                poleNumer.setText("" + (aktualny + 1));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) { }
+                }
+        );
+
 
 
 
